@@ -49,4 +49,25 @@ while True:
     pygame.display.flip()
 
     # Cap the frame rate
-    clock.tick(FPS)
+    clock.tick(FPS)class Sandwich:
+    def __init__(self, ingredients=[]):
+        self.ingredients = ingredients
+
+    def add_ingredient(self, ingredient):
+        self.ingredients.append(ingredient)
+
+    def display_sandwich(self):
+        print("Your sandwich:")
+        for ingredient in self.ingredients:
+            print(f"- {ingredient}")
+
+# Example usage
+if __name__ == "__main__":
+    my_sandwich = Sandwich()
+
+    print("Building your sandwich...")
+    my_sandwich.add_ingredient("Bread")
+    my_sandwich.add_ingredient("Turkey")
+    my_sandwich.add_ingredient("Lettuce")
+    my_sandwich.add_ingredient("Tomato")
+    my_sandwich.add
