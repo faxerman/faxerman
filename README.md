@@ -87,3 +87,53 @@ my_sandwich.add_ingredient("Mayonnaise")
 # Make the sandwich
 my_sandwich.make_sandwich()
 
+class Player:
+    def __init__(self, name, age, team):
+        self.name = name
+        self.age = age
+        self.team = team
+        self.score = 0
+
+    def shoot(self):
+        print(f"{self.name} takes a shot!")
+        # You can add logic here to determine if the shot is successful
+        # For simplicity, let's assume every shot is successful
+        self.score += 1
+        print(f"{self.name} scores! Current score: {self.score}")
+
+    def pass_ball(self, teammate):
+        print(f"{self.name} passes the ball to {teammate}.")
+
+# Create a player instance
+player1 = Player("John Doe", 25, "Team A")
+
+# Accessing player attributes
+print(f"{player1.name} is {player1.age} years old and plays for {player1.team}.")
+
+# Player actions
+player1.shoot(a)
+player1.pass_ball("Jane Smith")
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.inventory = []
+
+    def pick_up_item(self, item):
+        print(f"{self.name} picks up a {item}.")
+        self.inventory.append(item)
+
+    def show_inventory(self):
+        print(f"{self.name}'s Inventory:")
+        for item in self.inventory:
+            print("- " + item)
+
+# Create a player instance
+player1 = Player("Adventurer")
+
+# Player picks up items
+player1.pick_up_item("Sword")
+player1.pick_up_item("Shield")
+player1.pick_up_item("Health Potion")
+
+# Display player's inventory
+player1.show_inventory(b)
