@@ -137,3 +137,33 @@ player1.pick_up_item("Health Potion")
 
 # Display player's inventory
 player1.show_inventory(b)
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.location = (0, 0)
+
+    def move(self, direction):
+        if direction == "up":
+            self.location = (self.location[0], self.location[1] + 1)
+        elif direction == "down":
+            self.location = (self.location[0], self.location[1] - 1)
+        elif direction == "left":
+            self.location = (self.location[0] - 1, self.location[1])
+        elif direction == "right":
+            self.location = (self.location[0] + 1, self.location[1])
+        else:
+            print("Invalid direction. Choose 'up', 'down', 'left', or 'right'.")
+
+    def look_around(self):
+        print(f"{self.name} is currently at location {self.location}.")
+        print(f"{self.name} looks around.")
+
+# Create a player instance
+player1 = Player("Explorer")
+
+# Player moves around
+player1.move("up")
+player1.move("right")
+
+# Player looks around
+player1.look_around(1)
