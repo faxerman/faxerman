@@ -61,13 +61,29 @@ while True:
         for ingredient in self.ingredients:
             print(f"- {ingredient}")
 
-# Example usage
-if __name__ == "__main__":
-    my_sandwich = Sandwich()
+class Sandwich:
+    def __init__(self):
+        self.ingredients = []
 
-    print("Building your sandwich...")
-    my_sandwich.add_ingredient("Bread")
-    my_sandwich.add_ingredient("Turkey")
-    my_sandwich.add_ingredient("Lettuce")
-    my_sandwich.add_ingredient("Tomato")
-    my_sandwich.add
+    def add_ingredient(self, ingredient):
+        self.ingredients.append(ingredient)
+
+    def make_sandwich(self):
+        print("Making a delicious sandwich with the following ingredients:")
+        for ingredient in self.ingredients:
+            print("- " + ingredient)
+        print("Enjoy your sandwich!")
+
+# Create a sandwich instance
+my_sandwich = Sandwich()
+
+# Add ingredients
+my_sandwich.add_ingredient("Bread")
+my_sandwich.add_ingredient("Turkey")
+my_sandwich.add_ingredient("Lettuce")
+my_sandwich.add_ingredient("Tomato")
+my_sandwich.add_ingredient("Mayonnaise")
+
+# Make the sandwich
+my_sandwich.make_sandwich()
+
