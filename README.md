@@ -129,7 +129,50 @@ class Player:
 
 # Create a player instance
 player1 = Player("Adventurer")
+class ArenaMap:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.map_data = [['.' for _ in range(width)] for _ in range(height)]
 
+    def display_map(self):
+        for row in self.map_data:
+            print(" ".join(row))
+
+    def place_obstacle(self, x, y):
+        if 0 <= x < self.width and 0 <= y < self.height:
+            self.map_data[y][x] = 'X'
+            print(f"Obstacle placed at ({x}, {y}).")
+        else:
+            print("Invalid coordinates for placing an obstacle.")
+
+def main_menu():
+    print("Welcome to the Arena!")
+    print("1. View Arena Map")
+    print("2. Place Obstacle on Arena Map")
+    print("3. Exit")
+
+def navigate_menu(arena):
+    while True:
+        main_menu()
+        choice = input("Enter your choice (1-3): ")
+
+        if choice == '1':
+            print("\nArena Map:")
+            arena.display_map()
+        elif choice == '2':
+            x = int(input("Enter X coordinate for the obstacle: "))
+            y = int(input("Enter Y coordinate for the obstacle: "))
+            arena.place_obstacle(x, y)
+        elif choice == '3':
+            print("Exiting the Arena. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 3.")
+
+if __name__ == "__main__":
+    arena = ArenaMap(width=5, height=5)
+    navigate_menu(arena)
 # Player picks up items
 player1.pick_up_item("Sword")
 player1.pick_up_item("Shield")
@@ -167,3 +210,167 @@ player1.move("right")
 
 # Player looks around
 player1.look_around(1)
+import random
+
+class Sword:
+    def __init__(self, name, damage_range):
+        self.name = name
+        self.damage_range = damage_range
+
+    def attack(self):
+        damage = random.randint(*self.damage_range)
+        print(f"{self.name} performs an attack and deals {damage} damage!")
+        return damage
+
+# Example usage
+if __name__ == "__main__":
+    # Create a sword with a damage range
+    sword_of_might = Sword("Sword of Might", (10, 20))
+
+    # Perform attacks
+    total_damage = 20
+    for _ in range(5):
+        damage_dealt = sword_of_might.attack()
+        total_damage += damage_dealt
+
+    print(f"\nTotal damage dealt: {tclass Player:
+    def __init__(self, name, max_health, max_stamina):
+        self.name = name
+        self.max_health = max_health
+        self.max_stamina = max_stamina
+        self.health = max_health
+        self.stamina = max_stamina
+
+    def display_status(self):
+        print(f"{self.name}'s Status:")
+        print(f"Health: {self.health}/{self.max_health}")
+        print(f"Stamina: {self.stamina}/{self.max_stamina}")
+
+    def take_damage(self, damage):
+        self.health -= damage
+        if self.health < 0:
+            self.health = 0
+        print(f"{self.name} takes {damage} damage!")
+
+    def perform_attack(self, sword):
+        if self.stamina >= 5:
+            self.stamina -= 5
+            damage_dealt = sword.attack()
+            print(f"{self.name} performs an attack and consumes 5 stamina.")
+            return damage_dealt
+        else:
+            print(f"{self.name} does not have enough stamina to perform an attack!")
+            return 0
+
+    def rest(self):
+        self.stamina += 10
+        if self.stamina > self.max_stamina:
+            self.stamina = self.max_stamina
+        print(f"{self.name} rests and recovers 10 stamina.")
+
+# Example usage
+if __name__ == "__main__":
+    player1 = Player("Hero", max_health=100, max_stamina=50)
+    sword_of_might = Sword("Sword of Might", (10, 20))
+
+    # Display initial status
+    player1.display_status()
+
+    # Player takes damage
+    player1.take_damage(15)
+    player1.display_status()
+
+    # Perform attacks
+    total_damage = 0
+    for _ in range(3):
+        total_damage += player1.perform_attack(sword_of_might)
+
+    # Rest to recover stamina
+    player1.rest()
+    player1.display_status()
+
+import random
+
+class Sword:
+    def __init__(self, name, damage_range):
+        self.name = name
+        self.damage_range = damage_range
+
+    def attack(self):
+        damage = random.randint(*self.damage_range)
+        print(f"{self.name} performs an attack and deals {damage} damage!")
+        return damage
+
+class Shield:
+    def __init__(self, name, block_chance):
+        self.name = name
+        self.block_chance = block_chance
+
+    def block_attack(self):
+        if random.random() < self.block_chance:
+            print(f"{self.name} successfully blocks the attack!")
+            return True
+        else:
+            print(f"{self.name} fails to block the attack.")
+            return False
+
+class Player:
+    def __init__(self, name, max_health, max_stamina):
+        self.name = name
+        self.max_health = max_health
+        self.max_stamina = max_stamina
+        self.health = max_health
+        self.stamina = max_stamina
+        self.sword = Sword("Sword of Might", (10, 20))
+        self.shield = Shield("Iron Shield", block_chance=0.5)
+
+    def display_status(self):
+        print(f"{self.name}'s Status:")
+        print(f"Health: {self.health}/{self.max_health}")
+        print(f"Stamina: {self.stamina}/{self.max_stamina}")
+
+    def take_damage(self, damage):
+        self.health -= damage
+        if self.health < 0:
+            self.health = 0
+        print(f"{self.name} takes {damage} damage!")
+
+    def perform_attack(self):
+        if self.stamina >= 5:
+            self.stamina -= 5
+            damage_dealt = self.sword.attack()
+            print(f"{self.name} performs an attack and consumes 5 stamina.")
+            return damage_dealt
+        else:
+            print(f"{self.name} does not have enough stamina to perform an attack!")
+            return 0
+
+    def block_attack(self):
+        return self.shield.block_attack(10)
+
+    def rest(self):
+        self.stamina += 10
+        if self.stamina > self.max_stamina:
+            self.stamina = self.max_stamina
+        print(f"{self.name} rests and recovers 10 stamina.")
+
+# Example usage
+if __name__ == "__main__":
+    player1 = Player("Hero", max_health=100, max_stamina=50)
+
+    # Display initial status
+    player1.display_status(block)
+
+    # Perform attacks and shield blocks
+    total_damage = 0
+    for _ in range(3):
+        damage_dealt = player1.perform_attack()
+        if not player1.block_attack():
+            player1.take_damage(damage_dealt)
+        total_damage += damage_dealt
+
+    # Rest to recover stamina
+    player1.rest(block)
+    player1.display_status(block)
+
+    print(f"\nTotal damage dealt: {total_damage}")    print(f"\nTotal damage dealt: {total_damage}")otal_damage}")
