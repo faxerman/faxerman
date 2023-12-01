@@ -1,0 +1,57 @@
+import pygame
+import sys
+import time
+
+# Initialize Pygame
+pygame.init()
+
+# Set up the display
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Spinning Chip")
+
+# Load the image
+chip_image = pygame.image.load("chip.png")
+chip_rect = chip_image.get_rect(center=(width // 2, height // 2))
+
+# Set up the music
+pygame.mixer.init()
+pygame.mixer.music.load("funky_town.mp3")
+
+# Set the rotation angle
+angle = 0
+
+# Play the music
+pygame.mixer.music.play()
+
+# Set the duration (1 hour)
+duration_seconds = 3600
+start_time = time.time()
+
+# Main loop
+while time.time() - start_time < duration_seconds:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    # Rotate the image
+    rotated_chip = pygame.transform.rotate(chip_image, angle)
+    rotated_rect = rotated_chip.get_rect(center=chip_rect.center)
+
+    # Draw on the screen
+    screen.fill((255, 255, 255))
+    screen.blit(rotated_chip, rotated_rect.topleft)
+
+    # Update the display
+    pygame.display.flip()
+
+    # Increment the rotation angle
+    angle += 1
+
+    # Cap the frame rate
+    pygame.time.Clock().tick(60)
+
+# Stop the music and quit Pygame
+pygame.mixer.music.stop()
+pygame.quit()
